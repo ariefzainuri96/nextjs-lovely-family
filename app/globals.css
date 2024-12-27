@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+@layer components {
+    .bg-profile {
+        @apply flex size-[3.0625rem] cursor-pointer items-center justify-center rounded-full bg-gradient-to-t from-[#F66565] to-[#E53C3C] text-white;
+    }
+
+    .bg-icon {
+        @apply flex size-[1.875rem] items-center justify-center rounded-[8px];
+    }
+
+    /* font */
+    .poppins600-18 {
+        @apply text-[1.125rem] font-semibold text-[#465478];
+    }
+
+    .poppins600-16 {
+        @apply text-[1rem] font-semibold text-[#465478];
+    }
+
+    .poppins600-14 {
+        @apply text-[.875rem] font-semibold text-[#465478];
+    }
+
+    .poppins500-18 {
+        @apply text-[1.125rem] font-medium text-[#465478];
+    }
+
+    .poppins500-16 {
+        @apply text-[1rem] font-medium text-[#465478];
+    }
+
+    .poppins500-14 {
+        @apply text-[.875rem] font-medium text-[#465478];
+    }
+
+    .poppins500-12 {
+        @apply text-[.75rem] font-medium text-[#465478];
+    }
+
+    .poppins400-18 {
+        @apply text-[1.125rem] font-normal text-[#465478];
+    }
+
+    .poppins400-16 {
+        @apply text-[1rem] font-normal text-[#465478];
+    }
+
+    .poppins400-14 {
+        @apply text-[.875rem] font-normal text-[#465478];
+    }
+
+    .poppins400-12 {
+        @apply text-[.75rem] font-normal text-[#465478];
+    }
+}
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+    }
+
+    img {
+        width: auto;
+        height: auto;
+    }
+}
