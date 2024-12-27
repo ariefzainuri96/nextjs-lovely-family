@@ -10,6 +10,7 @@ import icClock from "@/public/icons/ic-clock.svg";
 import icNotification from "@/public/icons/ic-notification.svg";
 import LogoutPopover from "../components/logout-popover";
 import SheetSidebar from "../components/sheet-sidebar/sheet-sidebar";
+import Row from "@/components/reusable-components/row";
 
 const DashboardHeader = () => {
     const pathname = usePathname();

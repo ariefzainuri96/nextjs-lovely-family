@@ -11,6 +11,10 @@ import { TFormError } from "@/model/current-user";
 
 const key = new TextEncoder().encode(process.env.SECRET_KEY);
 
+export type TAuthCookie = {
+    token: string;
+};
+
 export async function authenticate(_: any, formData: FormData) {
     try {
         // const nis = formData.get("nis")?.toString() ?? "";
@@ -43,11 +47,11 @@ export async function authenticate(_: any, formData: FormData) {
         } else {
             return {
                 status: 401,
-                message: `Login failed, error: ${data?.message}`,
+                message: `Login failed${data?.message ? `: ${data.message}` : ""}`,
             };
         }
     } catch (error) {
-        return { status: 401, message: `${error}`, data: formData };
+        return { status: 401, message: `${error}` };
     }
 }
 
@@ -59,7 +63,9 @@ async function encrypt(payload: any, expires: Date) {
         .sign(key);
 }
 
-export async function decrypt<T>(input: string): Promise<any> {
+export async function decrypt<T>(input?: string): Promise<T | undefined> {
+    if (!input) return undefined;
+
     const { payload } = await jwtVerify(input, key, {
         algorithms: ["HS256"],
     });
@@ -70,8 +76,11 @@ export async function decrypt<T>(input: string): Promise<any> {
 export async function setAuthCookies(token: string) {
     // 60000 millisecond => 1 minute
     // 60 => how many minutes
+    const data = {
+        token: token,
+    };
     const expires = new Date(Date.now() + 60 * 24 * 60000);
-    const session = await encrypt(token, expires);
+    const session = await encrypt(data, expires);
     cookies().set(CURRENT_USER, session, { expires, httpOnly: true }); // httpOnly true -> we can only get cookies in server side
 }
 
